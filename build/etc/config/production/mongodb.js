@@ -8,7 +8,7 @@
 
 module.exports = {
     mongodb: {
-        host: '127.0.0.1',
+        host: 'data01.hexajans.com',
         port: 27017,
         database: 'leaves',
 
