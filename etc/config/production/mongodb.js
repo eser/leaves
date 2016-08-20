@@ -4,8 +4,8 @@ module.exports = {
         port: 27017,
         database: 'leaves',
 
-        // username: 'leaves',
-        // password: 'leaves',
+        username: 'leaves',
+        password: 'leaves',
 
         options: {
             /*

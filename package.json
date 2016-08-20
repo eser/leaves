@@ -15,7 +15,7 @@
     "node": ">=4.2.0"
   },
   "scripts": {
-    "start": "NODE_ENV=production PORT=3011 node ./bin/www",
+    "start": "NODE_ENV=production PORT=3012 node ./bin/www",
     "cmd": "HEX_CMD=1 node -r ./build/src/app.js",
     "test": "./node_modules/.bin/mocha"
   },
