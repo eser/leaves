@@ -1,0 +1,19 @@
+{
+    "exception": "özel bir durum oluştu",
+    "malformed_request": "hatalı istek",
+    "user_or_password_mismatch": "kullanıcı veya parola yanlış",
+    "user_id_or_access_token_mismatch": "kullanıcı id veya erişim anahtarı yanlış",
+    "user_id_or_refresh_token_mismatch": "kullanıcı id veya yenileme anahtarı yanlış",
+    "target_user_not_available": "hedef kullanıcı bulunamadı",
+    "target_post_not_available": "hedef ileti bulunamadı",
+    "target_event_not_available": "hedef eylem bulunamadı",
+    "target_event_already_exists": "hedef eylem zaten bulunuyor",
+
+    "you_user_liked_post": "{{username}} gönderinizi beğendi",
+    "you_user_commented_post": "{{username}} gönderinize yorum yaptı",
+    "you_user_followed": "{{username}} sizi takip etmeye başladı",
+
+    "following_user_liked_post": "{{username}} gönderinizi beğendi",
+    "following_user_commented_post": "{{username}} gönderinize yorum yaptı",
+    "following_user_followed": "{{username}} sizi takip etmeye başladı"
+}

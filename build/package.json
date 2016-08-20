@@ -1,0 +1,42 @@
+{
+  "name": "leaves",
+  "description": "Leaves",
+  "keywords": [],
+  "version": "0.2.0",
+  "homepage": "",
+  "author": "Eser Ozvataf <eser@ozvataf.com>",
+  "maintainers": [
+    "Eser Ozvataf <eser@ozvataf.com>"
+  ],
+  "license": "BSD-2-Clause",
+  "private": true,
+  "main": "./build/src/app.js",
+  "engines": {
+    "node": ">=4.2.0"
+  },
+  "scripts": {
+    "start": "NODE_ENV=production PORT=3011 node ./bin/www",
+    "cmd": "HEX_CMD=1 node -r ./build/src/app.js",
+    "test": "./node_modules/.bin/mocha"
+  },
+  "files": [
+    "bin",
+    "build",
+    "public"
+  ],
+  "bin": {},
+  "dependencies": {
+    "debug": "^2.2.0",
+    "ejs": "^2.5.1",
+    "hex-api-server": "^0.3.13",
+    "mongoose": "^4.5.9",
+    "node-fetch": "^1.6.0",
+    "node-uuid": "^1.4.7",
+    "nodemailer": "^2.5.0",
+    "validator": "^5.5.0"
+  },
+  "devDependencies": {
+    "apidoc": "^0.16.1",
+    "mocha": "^3.0.2"
+  }
+}

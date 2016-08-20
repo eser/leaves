@@ -1,0 +1,16 @@
+#!/usr/bin/env node
+
+const fs = require('fs'),
+    server = require('hex-api-server/lib/server.js'),
+    app = require('../build/src/app.js');
+
+const options = {
+    // port: 3000,
+    http2: false // ,
+    // server: {
+    //     key: fs.readFileSync(__dirname + '/../etc/certificates/server.key'),
+    //     cert: fs.readFileSync(__dirname + '/../etc/certificates/server.crt')
+    // }
+};
+
+server(app, options);

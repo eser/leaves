@@ -1,0 +1,19 @@
+{
+    "exception": "an exception is thrown",
+    "malformed_request": "malformed request",
+    "user_or_password_mismatch": "user or password mismatch",
+    "user_id_or_access_token_mismatch": "user identifier or access token mismatch",
+    "user_id_or_refresh_token_mismatch": "user identifier or refresh token mismatch",
+    "target_user_not_available": "target user is not available",
+    "target_post_not_available": "target post is not available",
+    "target_event_not_available": "target event is not available",
+    "target_event_already_exists": "target event is already exists",
+
+    "you_user_liked_post": "{{username}} liked your post",
+    "you_user_commented_post": "{{username}} commented on your post",
+    "you_user_followed": "{{username}} started following you",
+
+    "following_user_liked_post": "{{username}} liked your post",
+    "following_user_commented_post": "{{username}} commented on your post",
+    "following_user_followed": "{{username}} started following you"
+}

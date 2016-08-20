@@ -1,0 +1,38 @@
+<html>
+<body>
+    <%
+        let era = '';
+        let year = '';
+        let event = '';
+    %>
+    <% for (let item of model.entries) { %>
+        <%
+            if (era !== item.categories.era) {
+                era = item.categories.era;
+                year = '';
+                event = '';
+        %>
+        <h1><%= era %></h1>
+        <%
+            }
+
+            if (year !== item.categories.year) {
+                year = item.categories.year;
+                event = '';
+        %>
+        <h2><%= year %></h2>
+        <%
+            }
+
+            if (event !== item.categories.event) {
+                event = item.categories.event;
+        %>
+        <h3><%= event %></h3>
+        <%
+            }
+        %>
+
+        <li><%= item.content %></li>
+    <% } %>
+</body>
+</html>

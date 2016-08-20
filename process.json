@@ -1,0 +1,36 @@
+{
+    "apps" : [
+        {
+            "name"             : "leaves",
+            "script"           : "bin/www",
+            "args"             : [],
+            "node_args"        : [],
+            "exec_mode"        : "cluster",
+            "instances"        : 1,
+            "exec_interpreter" : "node",
+
+            "env"              : {
+                "NODE_ENV"     : "production",
+                "PORT"         : "3011"
+            },
+
+            "merge_logs"       : true,
+            "log_date_format"  : "YYYY-MM-DD HH:mm Z",
+
+            "watch"            : false,
+            "ignore_watch"     : [
+                ".ebextensions",
+                ".elasticbeanstalk",
+                ".vscode",
+                "node_modules",
+                "bin",
+                "src",
+                "etc",
+                "public"
+            ],
+            "watch_options"    : {
+                "followSymlinks": false
+            }
+        }
+    ]
+}
