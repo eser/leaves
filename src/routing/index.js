@@ -25,6 +25,19 @@ module.exports = (router, apiServer) => {
         r.route('/entries/search.:format')
             .get(frontControllers.entries.search);
 
+        // entries
+        r.route('/pages/id/:id.:format')
+            .get(frontControllers.pages.getById);
+
+        r.route('/pages/name/:name.:format')
+            .get(frontControllers.pages.getByName);
+
+        r.route('/pages/index.:format')
+            .get(frontControllers.pages.getAll);
+
+        r.route('/pages/search.:format')
+            .get(frontControllers.pages.search);
+
     });
 
 };
