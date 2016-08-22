@@ -24,11 +24,11 @@ class pages {
         }
 
         let entryRecords;
-        if (pageRecord.entries.type === 'category') {
-            entryRecords = await dataLayer.models.entryModel.getByCategory(pageRecord.entries.category, pageRecord.entries.value);
+        if (pageRecord.bindEntries.type === 'property') {
+            entryRecords = await dataLayer.models.entryModel.getByProperty(pageRecord.bindEntries.property, pageRecord.bindEntries.value);
         }
         else {
-            entryRecords = await dataLayer.models.entryModel.getByTag(pageRecord.entries.tag);
+            entryRecords = await dataLayer.models.entryModel.getByTag(pageRecord.bindEntries.tag);
         }
 
         return {
@@ -49,11 +49,11 @@ class pages {
         }
 
         let entryRecords;
-        if (pageRecord.entries.type === 'category') {
-            entryRecords = await dataLayer.models.entryModel.getByCategory(pageRecord.entries.category, pageRecord.entries.value);
+        if (pageRecord.bindEntries.type === 'property') {
+            entryRecords = await dataLayer.models.entryModel.getByProperty(pageRecord.bindEntries.property, pageRecord.bindEntries.value);
         }
         else {
-            entryRecords = await dataLayer.models.entryModel.getByTag(pageRecord.entries.tag);
+            entryRecords = await dataLayer.models.entryModel.getByTag(pageRecord.bindEntries.tag);
         }
 
         return {

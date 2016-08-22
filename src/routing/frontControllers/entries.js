@@ -13,10 +13,10 @@ class entries {
             .catch(next);
     }
 
-    static getByCategory(req, res, next) {
-        entriesController.getByCategory(req.params.category, req.params.value)
+    static getByProperty(req, res, next) {
+        entriesController.getByProperty(req.params.property, req.params.value)
             .then((result) => {
-                templates.process(req, res, 'entries/category', result);
+                templates.process(req, res, 'entries/property', result);
             })
             .catch(next);
     }

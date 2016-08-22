@@ -20,9 +20,9 @@ class entryModel {
         return entryRecord;
     }
 
-    async getByCategory(key, value) {
+    async getByProperty(property, value) {
         const entryRecords = await this.model.where({
-            [`categories.${key}`]: value
+            [`properties.${property}`]: value
         })
         .sort({ entry: 'asc' })
         .lean()

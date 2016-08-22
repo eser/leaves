@@ -29,12 +29,12 @@ class entryModel {
         })();
     }
 
-    getByCategory(key, value) {
+    getByProperty(property, value) {
         var _this2 = this;
 
         return _asyncToGenerator(function* () {
             const entryRecords = yield _this2.model.where({
-                [`categories.${ key }`]: value
+                [`properties.${ property }`]: value
             }).sort({ entry: 'asc' }).lean().find().exec();
 
             return entryRecords;

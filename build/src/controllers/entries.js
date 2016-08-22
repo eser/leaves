@@ -38,9 +38,9 @@ class entries {
         })();
     }
 
-    getByCategory(category, value) {
+    getByProperty(property, value) {
         return _asyncToGenerator(function* () {
-            const entryRecords = yield dataLayer.models.entryModel.getByCategory(category, value);
+            const entryRecords = yield dataLayer.models.entryModel.getByProperty(property, value);
 
             return {
                 entries: entryRecords

@@ -16,8 +16,8 @@ module.exports = (router, apiServer) => {
         r.route('/entries/ids/:id.:format')
             .get(frontControllers.entries.getById);
 
-        r.route('/entries/categories/:category/:value.:format')
-            .get(frontControllers.entries.getByCategory);
+        r.route('/entries/properties/:property/:value.:format')
+            .get(frontControllers.entries.getByProperty);
 
         r.route('/entries/tags/:tag.:format')
             .get(frontControllers.entries.getByTag);

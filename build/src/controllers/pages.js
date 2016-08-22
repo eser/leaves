@@ -33,10 +33,10 @@ class pages {
             }
 
             let entryRecords;
-            if (pageRecord.entries.type === 'category') {
-                entryRecords = yield dataLayer.models.entryModel.getByCategory(pageRecord.entries.category, pageRecord.entries.value);
+            if (pageRecord.bindEntries.type === 'property') {
+                entryRecords = yield dataLayer.models.entryModel.getByProperty(pageRecord.bindEntries.property, pageRecord.bindEntries.value);
             } else {
-                entryRecords = yield dataLayer.models.entryModel.getByTag(pageRecord.entries.tag);
+                entryRecords = yield dataLayer.models.entryModel.getByTag(pageRecord.bindEntries.tag);
             }
 
             return {
@@ -59,10 +59,10 @@ class pages {
             }
 
             let entryRecords;
-            if (pageRecord.entries.type === 'category') {
-                entryRecords = yield dataLayer.models.entryModel.getByCategory(pageRecord.entries.category, pageRecord.entries.value);
+            if (pageRecord.bindEntries.type === 'property') {
+                entryRecords = yield dataLayer.models.entryModel.getByProperty(pageRecord.bindEntries.property, pageRecord.bindEntries.value);
             } else {
-                entryRecords = yield dataLayer.models.entryModel.getByTag(pageRecord.entries.tag);
+                entryRecords = yield dataLayer.models.entryModel.getByTag(pageRecord.bindEntries.tag);
             }
 
             return {

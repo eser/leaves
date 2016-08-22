@@ -28,8 +28,8 @@ class entries {
         };
     }
 
-    async getByCategory(category, value) {
-        const entryRecords = await dataLayer.models.entryModel.getByCategory(category, value);
+    async getByProperty(property, value) {
+        const entryRecords = await dataLayer.models.entryModel.getByProperty(property, value);
 
         return {
             entries: entryRecords

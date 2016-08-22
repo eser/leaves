@@ -13,10 +13,10 @@ const pageSchema = new mongodbDriver.Schema({
     type: String,
     content: String,
 
-    entries: {
+    bindEntries: {
         type: String,
         tag: String,
-        category: String,
+        property: String,
         value: String
     }
 });

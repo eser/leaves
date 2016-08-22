@@ -11,7 +11,7 @@ const mongodbDriver = require('../mongodb.driver.js');
 const entrySchema = new mongodbDriver.Schema({
     entry: String,
 
-    categories: { Object: Object },
+    properties: { Object: Object },
 
     tags: [String],
 
