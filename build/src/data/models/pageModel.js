@@ -45,7 +45,7 @@ class pageModel {
         var _this3 = this;
 
         return _asyncToGenerator(function* () {
-            const pageRecords = yield _this3.model.where({}).sort({ name: 'asc' }).lean().find().exec();
+            const pageRecords = yield _this3.model.where({}).select('_id name').sort({ name: 'asc' }).lean().find().exec();
 
             return pageRecords;
         })();

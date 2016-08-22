@@ -13,23 +13,23 @@ module.exports = (router, apiServer) => {
             .get(frontControllers.index.healthCheck);
 
         // entries
-        r.route('/entries/id/:id.:format')
+        r.route('/entries/ids/:id.:format')
             .get(frontControllers.entries.getById);
 
-        r.route('/entries/category/:category/:value.:format')
+        r.route('/entries/categories/:category/:value.:format')
             .get(frontControllers.entries.getByCategory);
 
-        r.route('/entries/tag/:tag.:format')
+        r.route('/entries/tags/:tag.:format')
             .get(frontControllers.entries.getByTag);
 
         r.route('/entries/search.:format')
             .get(frontControllers.entries.search);
 
         // entries
-        r.route('/pages/id/:id.:format')
+        r.route('/pages/ids/:id.:format')
             .get(frontControllers.pages.getById);
 
-        r.route('/pages/name/:name.:format')
+        r.route('/pages/names/:name.:format')
             .get(frontControllers.pages.getByName);
 
         r.route('/pages/index.:format')

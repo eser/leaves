@@ -34,6 +34,7 @@ class pageModel {
     async getAll() {
         const pageRecords = await this.model.where({
         })
+        .select('_id name')
         .sort({ name: 'asc' })
         .lean()
         .find()
