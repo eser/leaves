@@ -23,8 +23,11 @@ class pages {
             throw new apiServer.protocolException(errors.targetPageNotAvailable);
         }
 
+        const entryRecords = await dataLayer.models.entryModel.getByTag(pageRecord.name);
+
         return {
-            page: pageRecord
+            page: pageRecord,
+            entries: entryRecords
         };
     }
 
@@ -39,8 +42,11 @@ class pages {
             throw new apiServer.protocolException(errors.targetPageNotAvailable);
         }
 
+        const entryRecords = await dataLayer.models.entryModel.getByTag(pageRecord.name);
+
         return {
-            page: pageRecord
+            page: pageRecord,
+            entries: entryRecords
         };
     }
 
