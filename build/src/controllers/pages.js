@@ -32,7 +32,12 @@ class pages {
                 throw new apiServer.protocolException(errors.targetPageNotAvailable);
             }
 
-            const entryRecords = yield dataLayer.models.entryModel.getByTag(pageRecord.name);
+            let entryRecords;
+            if (pageRecord.entries.type === 'category') {
+                entryRecords = yield dataLayer.models.entryModel.getByCategory(pageRecord.entries.category, pageRecord.entries.value);
+            } else {
+                entryRecords = yield dataLayer.models.entryModel.getByTag(pageRecord.entries.tag);
+            }
 
             return {
                 page: pageRecord,
@@ -53,7 +58,12 @@ class pages {
                 throw new apiServer.protocolException(errors.targetPageNotAvailable);
             }
 
-            const entryRecords = yield dataLayer.models.entryModel.getByTag(pageRecord.name);
+            let entryRecords;
+            if (pageRecord.entries.type === 'category') {
+                entryRecords = yield dataLayer.models.entryModel.getByCategory(pageRecord.entries.category, pageRecord.entries.value);
+            } else {
+                entryRecords = yield dataLayer.models.entryModel.getByTag(pageRecord.entries.tag);
+            }
 
             return {
                 page: pageRecord,

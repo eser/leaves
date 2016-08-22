@@ -23,7 +23,13 @@ class pages {
             throw new apiServer.protocolException(errors.targetPageNotAvailable);
         }
 
-        const entryRecords = await dataLayer.models.entryModel.getByTag(pageRecord.name);
+        let entryRecords;
+        if (pageRecord.entries.type === 'category') {
+            entryRecords = await dataLayer.models.entryModel.getByCategory(pageRecord.entries.category, pageRecord.entries.value);
+        }
+        else {
+            entryRecords = await dataLayer.models.entryModel.getByTag(pageRecord.entries.tag);
+        }
 
         return {
             page: pageRecord,
@@ -42,7 +48,13 @@ class pages {
             throw new apiServer.protocolException(errors.targetPageNotAvailable);
         }
 
-        const entryRecords = await dataLayer.models.entryModel.getByTag(pageRecord.name);
+        let entryRecords;
+        if (pageRecord.entries.type === 'category') {
+            entryRecords = await dataLayer.models.entryModel.getByCategory(pageRecord.entries.category, pageRecord.entries.value);
+        }
+        else {
+            entryRecords = await dataLayer.models.entryModel.getByTag(pageRecord.entries.tag);
+        }
 
         return {
             page: pageRecord,
