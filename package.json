@@ -26,12 +26,15 @@
   ],
   "bin": {},
   "dependencies": {
+    "bcryptjs": "^2.3.0",
     "debug": "^2.2.0",
     "ejs": "^2.5.1",
     "hex-api-server": "^0.3.13",
     "mongoose": "^4.5.9",
     "node-fetch": "^1.6.0",
     "node-uuid": "^1.4.7",
+    "nodemailer": "^2.5.0",
+    "phone": "^1.0.8",
     "validator": "^5.5.0"
   },
   "devDependencies": {

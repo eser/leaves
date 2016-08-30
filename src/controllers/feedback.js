@@ -3,8 +3,7 @@
 const validator = require('validator'),
     apiServer = require('hex-api-server'),
     dataLayer = require('../data/'),
-    validation = require('../utils/validation.js'),
-    shared = require('./shared.js');
+    validation = require('../utils/validation.js');
 
 const errors = {
     malformedRequest: { status: 400, message: 'malformed_request' }

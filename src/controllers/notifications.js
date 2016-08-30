@@ -12,13 +12,11 @@ const errors = {
 };
 
 class notifications {
-    async get(userId, pagerParams) {
+    async get(userId) {
         if (!validation.isDefined(userId) ||
             !validator.isMongoId(userId)) {
             throw new apiServer.protocolException(errors.malformedRequest);
         }
-
-        // const xpager = new dataLayer.pager(pagerParams, false, apiServer.config.limits.listPageSize);
 
         const user = await dataLayer.models.userModel.getSingleById(userId);
 
@@ -26,7 +24,7 @@ class notifications {
             throw new apiServer.protocolException(errors.targetUserNotAvailable);
         }
 
-        const notificationRecords = await dataLayer.models.notificationModel.get(/* xpager */);
+        const notificationRecords = await dataLayer.models.notificationModel.get();
 
         notificationRecords.map((item) => {
             if (user.lastNotificationSeen >= item._id) {
@@ -34,7 +32,6 @@ class notifications {
             }
         });
 
-        // return xpager.wrap(notificationRecords);
         return {
             items: notificationRecords
         };

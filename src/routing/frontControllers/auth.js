@@ -10,9 +10,7 @@ class auth {
     }
 
     static login(req, res, next) {
-        const params = req.body;
-
-        authController.login(params.email, params.password, params.details)
+        authController.login(req.body.email, req.body.password, req.body.details)
             .then((result) => {
                 res.json(result);
             })
@@ -20,7 +18,7 @@ class auth {
     }
 
     static logout(req, res, next) {
-        authController.logout(req.sessionId, req.sessionId)
+        authController.logout(req.sessionId)
             .then(() => {
                 // res.status(200)
                 //     .end();
@@ -30,9 +28,7 @@ class auth {
     }
 
     static refresh(req, res, next) {
-        const params = req.body;
-
-        authController.refresh(params.sessionId, params.refreshToken)
+        authController.refresh(req.get('sessionId'), req.get('refreshToken'))
             .then((result) => {
                 res.json(result);
             })

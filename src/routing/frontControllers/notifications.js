@@ -5,9 +5,7 @@ const notificationsController = require('../../controllers/notifications.js');
 class notifications {
 
     static index(req, res, next) {
-        const params = req.body;
-
-        notificationsController.get(req.userId, { cursor: params.cursor, sort: params.sort, limit: params.limit })
+        notificationsController.get(req.userId)
             .then((result) => {
                 res.json(result);
             })
@@ -15,8 +13,6 @@ class notifications {
     }
 
     static count(req, res, next) {
-        const params = req.body;
-
         notificationsController.getUnreadCount(req.userId)
             .then((result) => {
                 res.json(result);
@@ -25,9 +21,7 @@ class notifications {
     }
 
     static update(req, res, next) {
-        const params = req.body;
-
-        notificationsController.updateSeenAt(req.userId, params.lastNotificationId)
+        notificationsController.updateSeenAt(req.userId, req.body.lastNotificationId)
             .then(() => {
                 // res.status(200)
                 //     .end();

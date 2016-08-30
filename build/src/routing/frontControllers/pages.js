@@ -30,8 +30,6 @@ class pages {
     }
 
     static search(req, res, next) {
-        const params = req.body;
-
         pagesController.search(req.query.q).then(result => {
             templates.process(req, res, 'pages/search', result);
         }).catch(next);

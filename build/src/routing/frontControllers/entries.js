@@ -30,8 +30,6 @@ class entries {
     }
 
     static search(req, res, next) {
-        const params = req.body;
-
         entriesController.search(req.query.q).then(result => {
             templates.process(req, res, 'entries/search', result);
         }).catch(next);

@@ -154,6 +154,7 @@ class shared {
         const insertedSessionRecord = await dataLayer.models.sessionModel.insert(sessionData);
 
         return {
+            sessionId: insertedSessionRecord._id,
             refreshToken: refreshToken,
             accessToken: accessToken,
             accessTokenExpiresAt: new Date(accessTokenExpiresAt)

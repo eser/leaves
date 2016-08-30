@@ -12,8 +12,8 @@ module.exports = {
         port: 27017,
         database: 'leaves',
 
-        username: 'leaves',
-        password: 'leaves',
+        username: 'leavese',
+        password: 'TRNCKKTC19931998',
 
         options: {
             /*
