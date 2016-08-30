@@ -63,7 +63,7 @@ let config = new sey.config({
                 transpile: true
             },
             {
-                src: './etc/**/*.ejs',
+                src: [ './etc/**/*.ejs', './etc/**/.git*' ],
                 dest: './build/etc/',
 
                 eolfix: true
