@@ -8,7 +8,7 @@ const EventEmitter = require('events'),
 class dataLayer {
     constructor() {
         this.events = new EventEmitter();
-        this.models = {};
+        this.repositories = {};
     }
 
     start(options) {
@@ -18,21 +18,21 @@ class dataLayer {
         this.mongodbConnection.connect();
         this.mongodb = this.mongodbConnection.connection;
 
-        this.loadModels();
+        this.loadRepositories();
     }
 
-    loadModels() {
-        this.models = {};
+    loadRepositories() {
+        this.repositories = {};
 
         this.readDir(
-            'models',
+            'repositories',
             (file, dir) => {
                 const stat = fs.statSync(`${dir}/${file}`);
 
                 if (stat.isFile()) {
                     const basename = path.basename(file, '.js');
 
-                    this.models[basename] = require(`${dir}/${file}`);
+                    this.repositories[basename] = require(`${dir}/${file}`);
                 }
             }
         );
