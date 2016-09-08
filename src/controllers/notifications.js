@@ -18,13 +18,13 @@ class notifications {
             throw new apiServer.protocolException(errors.malformedRequest);
         }
 
-        const user = await dataLayer.models.userModel.getSingleById(userId);
+        const user = await dataLayer.repositories.userRepository.getSingleById(userId);
 
         if (user === null) {
             throw new apiServer.protocolException(errors.targetUserNotAvailable);
         }
 
-        const notificationRecords = await dataLayer.models.notificationModel.get();
+        const notificationRecords = await dataLayer.repositories.notificationRepository.get();
 
         notificationRecords.map((item) => {
             if (user.lastNotificationSeen >= item._id) {
@@ -43,13 +43,13 @@ class notifications {
             throw new apiServer.protocolException(errors.malformedRequest);
         }
 
-        const user = await dataLayer.models.userModel.getSingleById(userId);
+        const user = await dataLayer.repositories.userRepository.getSingleById(userId);
 
         if (user === null) {
             throw new apiServer.protocolException(errors.targetUserNotAvailable);
         }
 
-        const notificationCount = await dataLayer.models.notificationModel.aggrCount(user.lastNotificationSeen);
+        const notificationCount = await dataLayer.repositories.notificationRepository.aggrCount(user.lastNotificationSeen);
 
         return {
             count: notificationCount
@@ -63,7 +63,7 @@ class notifications {
             throw new apiServer.protocolException(errors.malformedRequest);
         }
 
-        const updatedRecord = await dataLayer.models.userModel.updateSingleById(
+        const updatedRecord = await dataLayer.repositories.userRepository.updateSingleById(
             userId,
             {
                 $set: {

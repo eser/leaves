@@ -17,7 +17,7 @@ class entries {
             throw new apiServer.protocolException(errors.malformedRequest);
         }
 
-        const entryRecord = await dataLayer.models.entryModel.getSingleById(entryId);
+        const entryRecord = await dataLayer.repositories.entryRepository.getSingleById(entryId);
 
         if (entryRecord === null) {
             throw new apiServer.protocolException(errors.targetEntryNotAvailable);
@@ -29,7 +29,7 @@ class entries {
     }
 
     async getByProperty(property, value) {
-        const entryRecords = await dataLayer.models.entryModel.getByProperty(property, value);
+        const entryRecords = await dataLayer.repositories.entryRepository.getByProperty(property, value);
 
         return {
             entries: entryRecords
@@ -37,7 +37,7 @@ class entries {
     }
 
     async getByTag(tag) {
-        const entryRecords = await dataLayer.models.entryModel.getByTag(tag);
+        const entryRecords = await dataLayer.repositories.entryRepository.getByTag(tag);
 
         return {
             entries: entryRecords
@@ -45,7 +45,7 @@ class entries {
     }
 
     async search(queryText) {
-        const entryRecords = await dataLayer.models.entryModel.search(queryText);
+        const entryRecords = await dataLayer.repositories.entryRepository.search(queryText);
 
         return {
             entries: entryRecords

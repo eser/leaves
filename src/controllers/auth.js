@@ -23,7 +23,7 @@ class auth {
             throw new apiServer.protocolException(errors.malformedRequest);
         }
 
-        const userRecord = await dataLayer.models.userModel.getSingleByEmail(email);
+        const userRecord = await dataLayer.repositories.userRepository.getSingleByEmail(email);
 
         if (userRecord === null ||
             !security.bcryptCompare(password, userRecord.password)) {
@@ -52,13 +52,13 @@ class auth {
         const newAccessToken = uuid.v4(),
             newAccessTokenExpiresAt = Date.now() + apiServer.config.tokens.accessTokenTtl;
 
-        const sessionRecord = await dataLayer.models.sessionModel.getSingleByIdAndRefreshToken(sessionId, security.sha1(refreshToken));
+        const sessionRecord = await dataLayer.repositories.sessionRepository.getSingleByIdAndRefreshToken(sessionId, security.sha1(refreshToken));
 
         if (sessionRecord === null) {
             throw new apiServer.protocolException(errors.sessionIdOrRefreshTokenMismatch);
         }
 
-        const updatedSessionRecord = await dataLayer.models.sessionModel.updateSingleById(
+        const updatedSessionRecord = await dataLayer.repositories.sessionRepository.updateSingleById(
             sessionRecord._id,
             {
                 $set: {
@@ -83,7 +83,7 @@ class auth {
 
         const sha1key = security.sha1(accessToken);
 
-        const sessionRecord = await dataLayer.models.sessionModel.getSingleByIdAndAccessToken(sessionId, sha1key);
+        const sessionRecord = await dataLayer.repositories.sessionRepository.getSingleByIdAndAccessToken(sessionId, sha1key);
 
         if (sessionRecord === null) {
             return null;
@@ -102,7 +102,7 @@ class auth {
             throw new apiServer.protocolException(errors.malformedRequest);
         }
 
-        const session = await dataLayer.models.sessionModel.updateSingleById(
+        const session = await dataLayer.repositories.sessionRepository.updateSingleById(
             sessionId,
             {
                 $set: {

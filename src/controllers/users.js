@@ -23,7 +23,7 @@ class users {
 
             firstname: userData.firstname,
             lastname: userData.lastname,
-            gender: userData.gender || dataLayer.models.userModel.genderValues.UNSPECIFIED,
+            gender: userData.gender || dataLayer.repositories.userRepository.genderValues.UNSPECIFIED,
             birthDate: userData.birthDate,
             phone: userData.phone,
             phoneVerified: false,
@@ -51,10 +51,10 @@ class users {
             throw new apiServer.protocolException(errors.malformedRequest);
         }
 
-        let invitationRecord = await dataLayer.models.invitationModel.getFirstAvailableByUser(userId);
+        let invitationRecord = await dataLayer.repositories.invitationRepository.getFirstAvailableByUser(userId);
 
         if (invitationRecord === null) {
-            invitationRecord = await dataLayer.models.invitationModel.insert({
+            invitationRecord = await dataLayer.repositories.invitationRepository.insert({
                 _session: sessionId,
                 _user: userId,
 
@@ -74,7 +74,7 @@ class users {
             throw new apiServer.protocolException(errors.malformedRequest);
         }
 
-        const userRecord = await dataLayer.models.userModel.getSingleById(targetUserId);
+        const userRecord = await dataLayer.repositories.userRepository.getSingleById(targetUserId);
 
         if (userRecord === null) {
             throw new apiServer.protocolException(errors.targetUserNotAvailable);
@@ -91,7 +91,7 @@ class users {
             throw new apiServer.protocolException(errors.malformedRequest);
         }
 
-        const userRecord = await dataLayer.models.userModel.getSingleByEmail(targetEmail);
+        const userRecord = await dataLayer.repositories.userRepository.getSingleByEmail(targetEmail);
 
         if (userRecord === null) {
             throw new apiServer.protocolException(errors.targetUserNotAvailable);
@@ -109,9 +109,9 @@ class users {
             throw new apiServer.protocolException(errors.malformedRequest);
         }
 
-        const confirmationRecord = await dataLayer.models.confirmationModel.getSingleByTypeAndCode(
+        const confirmationRecord = await dataLayer.repositories.confirmationRepository.getSingleByTypeAndCode(
                 targetUserId,
-                dataLayer.models.confirmationModel.typeValues.EMAIL_ADDRESS,
+                dataLayer.repositories.confirmationRepository.typeValues.EMAIL_ADDRESS,
                 code
             );
 
@@ -120,7 +120,7 @@ class users {
         }
 
         // type and code check
-        const updatedRecord = await dataLayer.models.userModel.updateSingleById(
+        const updatedRecord = await dataLayer.repositories.userRepository.updateSingleById(
             targetUserId,
             {
                 $set: {
@@ -129,7 +129,7 @@ class users {
             }
         );
 
-        await dataLayer.models.confirmationModel.updateSingleById(
+        await dataLayer.repositories.confirmationRepository.updateSingleById(
             confirmationRecord._id,
             {
                 $set: {
@@ -150,9 +150,9 @@ class users {
             throw new apiServer.protocolException(errors.malformedRequest);
         }
 
-        const confirmationRecord = await dataLayer.models.confirmationModel.getSingleByTypeAndCode(
+        const confirmationRecord = await dataLayer.repositories.confirmationRepository.getSingleByTypeAndCode(
                 targetUserId,
-                dataLayer.models.confirmationModel.typeValues.PHONE_NUMBER,
+                dataLayer.repositories.confirmationRepository.typeValues.PHONE_NUMBER,
                 code
             );
 
@@ -161,7 +161,7 @@ class users {
         }
 
         // type and code check
-        const updatedRecord = await dataLayer.models.userModel.updateSingleById(
+        const updatedRecord = await dataLayer.repositories.userRepository.updateSingleById(
             targetUserId,
             {
                 $set: {
@@ -170,7 +170,7 @@ class users {
             }
         );
 
-        await dataLayer.models.confirmationModel.updateSingleById(
+        await dataLayer.repositories.confirmationRepository.updateSingleById(
             confirmationRecord._id,
             {
                 $set: {
@@ -263,7 +263,7 @@ class users {
             }
         }
 
-        const updatedRecord = await dataLayer.models.userModel.updateSingleById(
+        const updatedRecord = await dataLayer.repositories.userRepository.updateSingleById(
             targetUserId,
             {
                 $set: fields

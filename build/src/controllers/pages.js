@@ -26,7 +26,7 @@ class pages {
                 throw new apiServer.protocolException(errors.malformedRequest);
             }
 
-            const pageRecord = yield dataLayer.models.pageModel.getSingleById(pageId);
+            const pageRecord = yield dataLayer.repositories.pageRepository.getSingleById(pageId);
 
             if (pageRecord === null) {
                 throw new apiServer.protocolException(errors.targetPageNotAvailable);
@@ -34,9 +34,9 @@ class pages {
 
             let entryRecords;
             if (pageRecord.bindEntries.type === 'property') {
-                entryRecords = yield dataLayer.models.entryModel.getByProperty(pageRecord.bindEntries.property, pageRecord.bindEntries.value);
+                entryRecords = yield dataLayer.repositories.entryRepository.getByProperty(pageRecord.bindEntries.property, pageRecord.bindEntries.value);
             } else {
-                entryRecords = yield dataLayer.models.entryModel.getByTag(pageRecord.bindEntries.tag);
+                entryRecords = yield dataLayer.repositories.entryRepository.getByTag(pageRecord.bindEntries.tag);
             }
 
             return {
@@ -52,7 +52,7 @@ class pages {
             //     throw new apiServer.protocolException(errors.malformedRequest);
             // }
 
-            const pageRecord = yield dataLayer.models.pageModel.getSingleByName(pageName);
+            const pageRecord = yield dataLayer.repositories.pageRepository.getSingleByName(pageName);
 
             if (pageRecord === null) {
                 throw new apiServer.protocolException(errors.targetPageNotAvailable);
@@ -60,9 +60,9 @@ class pages {
 
             let entryRecords;
             if (pageRecord.bindEntries.type === 'property') {
-                entryRecords = yield dataLayer.models.entryModel.getByProperty(pageRecord.bindEntries.property, pageRecord.bindEntries.value);
+                entryRecords = yield dataLayer.repositories.entryRepository.getByProperty(pageRecord.bindEntries.property, pageRecord.bindEntries.value);
             } else {
-                entryRecords = yield dataLayer.models.entryModel.getByTag(pageRecord.bindEntries.tag);
+                entryRecords = yield dataLayer.repositories.entryRepository.getByTag(pageRecord.bindEntries.tag);
             }
 
             return {
@@ -74,7 +74,7 @@ class pages {
 
     getAll() {
         return _asyncToGenerator(function* () {
-            const pageRecords = yield dataLayer.models.pageModel.getAll();
+            const pageRecords = yield dataLayer.repositories.pageRepository.getAll();
 
             return {
                 pages: pageRecords
@@ -84,7 +84,7 @@ class pages {
 
     search(queryText) {
         return _asyncToGenerator(function* () {
-            const pageRecords = yield dataLayer.models.pageModel.search(queryText);
+            const pageRecords = yield dataLayer.repositories.pageRepository.search(queryText);
 
             return {
                 pages: pageRecords

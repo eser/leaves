@@ -41,13 +41,13 @@ class shared {
             throw new apiServer.protocolException(errors.malformedRequest);
         }
 
-        const userEmailCheck = await dataLayer.models.userModel.getSingleByEmail(userData.email);
+        const userEmailCheck = await dataLayer.repositories.userRepository.getSingleByEmail(userData.email);
 
         if (userEmailCheck !== null) {
             throw new apiServer.protocolException(errors.emailIsAlreadyRegistered);
         }
 
-        const userPhoneCheck = await dataLayer.models.userModel.getSingleByPhone(phoneNumber[0]);
+        const userPhoneCheck = await dataLayer.repositories.userRepository.getSingleByPhone(phoneNumber[0]);
 
         if (userPhoneCheck !== null) {
             throw new apiServer.protocolException(errors.phoneIsAlreadyRegistered);
@@ -60,7 +60,7 @@ class shared {
                 throw new apiServer.protocolException(errors.malformedRequest);
             }
 
-            invitationRecord = await dataLayer.models.invitationModel.getSingleByCode(userData.invitationCode);
+            invitationRecord = await dataLayer.repositories.invitationRepository.getSingleByCode(userData.invitationCode);
 
             if (invitationRecord === null) {
                 throw new apiServer.protocolException(errors.invitationCodeNotAvailable);
@@ -103,10 +103,10 @@ class shared {
             }
         };
 
-        const insertedRecord = await dataLayer.models.userModel.insert(userRecord);
+        const insertedRecord = await dataLayer.repositories.userRepository.insert(userRecord);
 
         if (invitationRecord !== undefined) {
-            await dataLayer.models.invitationModel.updateSingleById(
+            await dataLayer.repositories.invitationRepository.updateSingleById(
                 invitationRecord._id,
                 {
                     $set: {
@@ -151,7 +151,7 @@ class shared {
                 }
             };
 
-        const insertedSessionRecord = await dataLayer.models.sessionModel.insert(sessionData);
+        const insertedSessionRecord = await dataLayer.repositories.sessionRepository.insert(sessionData);
 
         return {
             sessionId: insertedSessionRecord._id,

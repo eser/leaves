@@ -26,7 +26,7 @@ class entries {
                 throw new apiServer.protocolException(errors.malformedRequest);
             }
 
-            const entryRecord = yield dataLayer.models.entryModel.getSingleById(entryId);
+            const entryRecord = yield dataLayer.repositories.entryRepository.getSingleById(entryId);
 
             if (entryRecord === null) {
                 throw new apiServer.protocolException(errors.targetEntryNotAvailable);
@@ -40,7 +40,7 @@ class entries {
 
     getByProperty(property, value) {
         return _asyncToGenerator(function* () {
-            const entryRecords = yield dataLayer.models.entryModel.getByProperty(property, value);
+            const entryRecords = yield dataLayer.repositories.entryRepository.getByProperty(property, value);
 
             return {
                 entries: entryRecords
@@ -50,7 +50,7 @@ class entries {
 
     getByTag(tag) {
         return _asyncToGenerator(function* () {
-            const entryRecords = yield dataLayer.models.entryModel.getByTag(tag);
+            const entryRecords = yield dataLayer.repositories.entryRepository.getByTag(tag);
 
             return {
                 entries: entryRecords
@@ -60,7 +60,7 @@ class entries {
 
     search(queryText) {
         return _asyncToGenerator(function* () {
-            const entryRecords = yield dataLayer.models.entryModel.search(queryText);
+            const entryRecords = yield dataLayer.repositories.entryRepository.search(queryText);
 
             return {
                 entries: entryRecords

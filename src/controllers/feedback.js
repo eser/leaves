@@ -24,7 +24,7 @@ class feedback {
             message: feedbackDetail.message
         };
 
-        await dataLayer.models.feedbackModel.insert(feedbackRecord);
+        await dataLayer.repositories.feedbackRepository.insert(feedbackRecord);
 
         // TODO send mail
     }

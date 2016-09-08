@@ -50,13 +50,13 @@ class shared {
                     throw new apiServer.protocolException(errors.malformedRequest);
                 }
 
-            const userEmailCheck = yield dataLayer.models.userModel.getSingleByEmail(userData.email);
+            const userEmailCheck = yield dataLayer.repositories.userRepository.getSingleByEmail(userData.email);
 
             if (userEmailCheck !== null) {
                 throw new apiServer.protocolException(errors.emailIsAlreadyRegistered);
             }
 
-            const userPhoneCheck = yield dataLayer.models.userModel.getSingleByPhone(phoneNumber[0]);
+            const userPhoneCheck = yield dataLayer.repositories.userRepository.getSingleByPhone(phoneNumber[0]);
 
             if (userPhoneCheck !== null) {
                 throw new apiServer.protocolException(errors.phoneIsAlreadyRegistered);
@@ -69,7 +69,7 @@ class shared {
                     throw new apiServer.protocolException(errors.malformedRequest);
                 }
 
-                invitationRecord = yield dataLayer.models.invitationModel.getSingleByCode(userData.invitationCode);
+                invitationRecord = yield dataLayer.repositories.invitationRepository.getSingleByCode(userData.invitationCode);
 
                 if (invitationRecord === null) {
                     throw new apiServer.protocolException(errors.invitationCodeNotAvailable);
@@ -108,10 +108,10 @@ class shared {
                 }
             };
 
-            const insertedRecord = yield dataLayer.models.userModel.insert(userRecord);
+            const insertedRecord = yield dataLayer.repositories.userRepository.insert(userRecord);
 
             if (invitationRecord !== undefined) {
-                yield dataLayer.models.invitationModel.updateSingleById(invitationRecord._id, {
+                yield dataLayer.repositories.invitationRepository.updateSingleById(invitationRecord._id, {
                     $set: {
                         isUsed: true
                     }
@@ -154,7 +154,7 @@ class shared {
                 }
             };
 
-            const insertedSessionRecord = yield dataLayer.models.sessionModel.insert(sessionData);
+            const insertedSessionRecord = yield dataLayer.repositories.sessionRepository.insert(sessionData);
 
             return {
                 sessionId: insertedSessionRecord._id,

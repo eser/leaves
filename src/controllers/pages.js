@@ -17,7 +17,7 @@ class pages {
             throw new apiServer.protocolException(errors.malformedRequest);
         }
 
-        const pageRecord = await dataLayer.models.pageModel.getSingleById(pageId);
+        const pageRecord = await dataLayer.repositories.pageRepository.getSingleById(pageId);
 
         if (pageRecord === null) {
             throw new apiServer.protocolException(errors.targetPageNotAvailable);
@@ -25,10 +25,10 @@ class pages {
 
         let entryRecords;
         if (pageRecord.bindEntries.type === 'property') {
-            entryRecords = await dataLayer.models.entryModel.getByProperty(pageRecord.bindEntries.property, pageRecord.bindEntries.value);
+            entryRecords = await dataLayer.repositories.entryRepository.getByProperty(pageRecord.bindEntries.property, pageRecord.bindEntries.value);
         }
         else {
-            entryRecords = await dataLayer.models.entryModel.getByTag(pageRecord.bindEntries.tag);
+            entryRecords = await dataLayer.repositories.entryRepository.getByTag(pageRecord.bindEntries.tag);
         }
 
         return {
@@ -42,7 +42,7 @@ class pages {
         //     throw new apiServer.protocolException(errors.malformedRequest);
         // }
 
-        const pageRecord = await dataLayer.models.pageModel.getSingleByName(pageName);
+        const pageRecord = await dataLayer.repositories.pageRepository.getSingleByName(pageName);
 
         if (pageRecord === null) {
             throw new apiServer.protocolException(errors.targetPageNotAvailable);
@@ -50,10 +50,10 @@ class pages {
 
         let entryRecords;
         if (pageRecord.bindEntries.type === 'property') {
-            entryRecords = await dataLayer.models.entryModel.getByProperty(pageRecord.bindEntries.property, pageRecord.bindEntries.value);
+            entryRecords = await dataLayer.repositories.entryRepository.getByProperty(pageRecord.bindEntries.property, pageRecord.bindEntries.value);
         }
         else {
-            entryRecords = await dataLayer.models.entryModel.getByTag(pageRecord.bindEntries.tag);
+            entryRecords = await dataLayer.repositories.entryRepository.getByTag(pageRecord.bindEntries.tag);
         }
 
         return {
@@ -63,7 +63,7 @@ class pages {
     }
 
     async getAll() {
-        const pageRecords = await dataLayer.models.pageModel.getAll();
+        const pageRecords = await dataLayer.repositories.pageRepository.getAll();
 
         return {
             pages: pageRecords
@@ -71,7 +71,7 @@ class pages {
     }
 
     async search(queryText) {
-        const pageRecords = await dataLayer.models.pageModel.search(queryText);
+        const pageRecords = await dataLayer.repositories.pageRepository.search(queryText);
 
         return {
             pages: pageRecords

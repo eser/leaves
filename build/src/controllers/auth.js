@@ -30,7 +30,7 @@ class auth {
                 throw new apiServer.protocolException(errors.malformedRequest);
             }
 
-            const userRecord = yield dataLayer.models.userModel.getSingleByEmail(email);
+            const userRecord = yield dataLayer.repositories.userRepository.getSingleByEmail(email);
 
             if (userRecord === null || !security.bcryptCompare(password, userRecord.password)) {
                 throw new apiServer.protocolException(errors.userOrPasswordMismatch);
@@ -58,13 +58,13 @@ class auth {
             const newAccessToken = uuid.v4(),
                   newAccessTokenExpiresAt = Date.now() + apiServer.config.tokens.accessTokenTtl;
 
-            const sessionRecord = yield dataLayer.models.sessionModel.getSingleByIdAndRefreshToken(sessionId, security.sha1(refreshToken));
+            const sessionRecord = yield dataLayer.repositories.sessionRepository.getSingleByIdAndRefreshToken(sessionId, security.sha1(refreshToken));
 
             if (sessionRecord === null) {
                 throw new apiServer.protocolException(errors.sessionIdOrRefreshTokenMismatch);
             }
 
-            const updatedSessionRecord = yield dataLayer.models.sessionModel.updateSingleById(sessionRecord._id, {
+            const updatedSessionRecord = yield dataLayer.repositories.sessionRepository.updateSingleById(sessionRecord._id, {
                 $set: {
                     accessToken: security.sha1(newAccessToken),
                     accessTokenExpiresAt: newAccessTokenExpiresAt
@@ -86,7 +86,7 @@ class auth {
 
             const sha1key = security.sha1(accessToken);
 
-            const sessionRecord = yield dataLayer.models.sessionModel.getSingleByIdAndAccessToken(sessionId, sha1key);
+            const sessionRecord = yield dataLayer.repositories.sessionRepository.getSingleByIdAndAccessToken(sessionId, sha1key);
 
             if (sessionRecord === null) {
                 return null;
@@ -106,7 +106,7 @@ class auth {
                 throw new apiServer.protocolException(errors.malformedRequest);
             }
 
-            const session = yield dataLayer.models.sessionModel.updateSingleById(sessionId, {
+            const session = yield dataLayer.repositories.sessionRepository.updateSingleById(sessionId, {
                 $set: {
                     terminatedAt: Date.now()
                 }

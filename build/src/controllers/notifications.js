@@ -26,13 +26,13 @@ class notifications {
                 throw new apiServer.protocolException(errors.malformedRequest);
             }
 
-            const user = yield dataLayer.models.userModel.getSingleById(userId);
+            const user = yield dataLayer.repositories.userRepository.getSingleById(userId);
 
             if (user === null) {
                 throw new apiServer.protocolException(errors.targetUserNotAvailable);
             }
 
-            const notificationRecords = yield dataLayer.models.notificationModel.get();
+            const notificationRecords = yield dataLayer.repositories.notificationRepository.get();
 
             notificationRecords.map(function (item) {
                 if (user.lastNotificationSeen >= item._id) {
@@ -52,13 +52,13 @@ class notifications {
                 throw new apiServer.protocolException(errors.malformedRequest);
             }
 
-            const user = yield dataLayer.models.userModel.getSingleById(userId);
+            const user = yield dataLayer.repositories.userRepository.getSingleById(userId);
 
             if (user === null) {
                 throw new apiServer.protocolException(errors.targetUserNotAvailable);
             }
 
-            const notificationCount = yield dataLayer.models.notificationModel.aggrCount(user.lastNotificationSeen);
+            const notificationCount = yield dataLayer.repositories.notificationRepository.aggrCount(user.lastNotificationSeen);
 
             return {
                 count: notificationCount
@@ -72,7 +72,7 @@ class notifications {
                 throw new apiServer.protocolException(errors.malformedRequest);
             }
 
-            const updatedRecord = yield dataLayer.models.userModel.updateSingleById(userId, {
+            const updatedRecord = yield dataLayer.repositories.userRepository.updateSingleById(userId, {
                 $set: {
                     lastNotificationSeen: lastNotificationId
                 }

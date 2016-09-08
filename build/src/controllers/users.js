@@ -32,7 +32,7 @@ class users {
 
                 firstname: userData.firstname,
                 lastname: userData.lastname,
-                gender: userData.gender || dataLayer.models.userModel.genderValues.UNSPECIFIED,
+                gender: userData.gender || dataLayer.repositories.userRepository.genderValues.UNSPECIFIED,
                 birthDate: userData.birthDate,
                 phone: userData.phone,
                 phoneVerified: false,
@@ -61,10 +61,10 @@ class users {
                 throw new apiServer.protocolException(errors.malformedRequest);
             }
 
-            let invitationRecord = yield dataLayer.models.invitationModel.getFirstAvailableByUser(userId);
+            let invitationRecord = yield dataLayer.repositories.invitationRepository.getFirstAvailableByUser(userId);
 
             if (invitationRecord === null) {
-                invitationRecord = yield dataLayer.models.invitationModel.insert({
+                invitationRecord = yield dataLayer.repositories.invitationRepository.insert({
                     _session: sessionId,
                     _user: userId,
 
@@ -85,7 +85,7 @@ class users {
                 throw new apiServer.protocolException(errors.malformedRequest);
             }
 
-            const userRecord = yield dataLayer.models.userModel.getSingleById(targetUserId);
+            const userRecord = yield dataLayer.repositories.userRepository.getSingleById(targetUserId);
 
             if (userRecord === null) {
                 throw new apiServer.protocolException(errors.targetUserNotAvailable);
@@ -103,7 +103,7 @@ class users {
                 throw new apiServer.protocolException(errors.malformedRequest);
             }
 
-            const userRecord = yield dataLayer.models.userModel.getSingleByEmail(targetEmail);
+            const userRecord = yield dataLayer.repositories.userRepository.getSingleByEmail(targetEmail);
 
             if (userRecord === null) {
                 throw new apiServer.protocolException(errors.targetUserNotAvailable);
@@ -121,20 +121,20 @@ class users {
                 throw new apiServer.protocolException(errors.malformedRequest);
             }
 
-            const confirmationRecord = yield dataLayer.models.confirmationModel.getSingleByTypeAndCode(targetUserId, dataLayer.models.confirmationModel.typeValues.EMAIL_ADDRESS, code);
+            const confirmationRecord = yield dataLayer.repositories.confirmationRepository.getSingleByTypeAndCode(targetUserId, dataLayer.repositories.confirmationRepository.typeValues.EMAIL_ADDRESS, code);
 
             if (confirmationRecord === null) {
                 throw new apiServer.protocolException(errors.confirmationCodeNotAvailable);
             }
 
             // type and code check
-            const updatedRecord = yield dataLayer.models.userModel.updateSingleById(targetUserId, {
+            const updatedRecord = yield dataLayer.repositories.userRepository.updateSingleById(targetUserId, {
                 $set: {
                     emailVerified: true
                 }
             });
 
-            yield dataLayer.models.confirmationModel.updateSingleById(confirmationRecord._id, {
+            yield dataLayer.repositories.confirmationRepository.updateSingleById(confirmationRecord._id, {
                 $set: {
                     confirmedAt: Date.now()
                 }
@@ -152,20 +152,20 @@ class users {
                 throw new apiServer.protocolException(errors.malformedRequest);
             }
 
-            const confirmationRecord = yield dataLayer.models.confirmationModel.getSingleByTypeAndCode(targetUserId, dataLayer.models.confirmationModel.typeValues.PHONE_NUMBER, code);
+            const confirmationRecord = yield dataLayer.repositories.confirmationRepository.getSingleByTypeAndCode(targetUserId, dataLayer.repositories.confirmationRepository.typeValues.PHONE_NUMBER, code);
 
             if (confirmationRecord === null) {
                 throw new apiServer.protocolException(errors.confirmationCodeNotAvailable);
             }
 
             // type and code check
-            const updatedRecord = yield dataLayer.models.userModel.updateSingleById(targetUserId, {
+            const updatedRecord = yield dataLayer.repositories.userRepository.updateSingleById(targetUserId, {
                 $set: {
                     phoneVerified: true
                 }
             });
 
-            yield dataLayer.models.confirmationModel.updateSingleById(confirmationRecord._id, {
+            yield dataLayer.repositories.confirmationRepository.updateSingleById(confirmationRecord._id, {
                 $set: {
                     confirmedAt: Date.now()
                 }
@@ -252,7 +252,7 @@ class users {
                 }
             }
 
-            const updatedRecord = yield dataLayer.models.userModel.updateSingleById(targetUserId, {
+            const updatedRecord = yield dataLayer.repositories.userRepository.updateSingleById(targetUserId, {
                 $set: fields
             });
 

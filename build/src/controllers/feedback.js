@@ -32,7 +32,7 @@ class feedback {
                 message: feedbackDetail.message
             };
 
-            yield dataLayer.models.feedbackModel.insert(feedbackRecord);
+            yield dataLayer.repositories.feedbackRepository.insert(feedbackRecord);
 
             // TODO send mail
         })();
