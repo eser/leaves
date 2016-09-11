@@ -29,13 +29,13 @@
     "bcryptjs": "^2.3.0",
     "debug": "^2.2.0",
     "ejs": "^2.5.2",
-    "hex-api-server": "^0.3.22",
+    "hex-api-server": "^0.3.25",
     "mongoose": "^4.6.0",
     "node-fetch": "^1.6.0",
     "node-uuid": "^1.4.7",
     "nodemailer": "^2.6.0",
     "phone": "^1.0.8",
-    "validator": "^5.6.0"
+    "validator": "^5.7.0"
   },
   "devDependencies": {
     "apidoc": "^0.16.1",
