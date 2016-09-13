@@ -5,21 +5,15 @@ jsmake.task('dependencies', function () {
 });
 
 jsmake.task('docs', function () {
-    var commands = [
-        'rm -rf ./public/docs',
-        npm_dir + 'apidoc -i src/ -o public/docs/'
-    ];
+    jsmake.utils.rmdir('./public/docs');
 
-    jsmake.utils.shell(commands);
+    jsmake.utils.shell(npm_dir + 'apidoc -i src/ -o public/docs/');
 });
 
 jsmake.task('docs-win', function () {
-    var commands = [
-        'del /s /q .\\public\\docs',
-        npm_dir.replace(/\//g, '\\') + 'apidoc -i src\\ -o public\\docs\\'
-    ];
+    jsmake.utils.rmdir('./public/docs');
 
-    jsmake.utils.shell(commands);
+    jsmake.utils.shell(npm_dir.replace(/\//g, '\\') + 'apidoc -i src\\ -o public\\docs\\');
 });
 
 jsmake.task('default', function () {
